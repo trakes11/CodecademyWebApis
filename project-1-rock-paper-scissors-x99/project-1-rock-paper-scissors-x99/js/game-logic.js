@@ -41,19 +41,113 @@ function setPlayerMoves(player, moveOneType,
         }else{
           console.log("Unable to set player moves");
         }
-
       }
 
-function determinePlayerMoveType(){
-  console.log("Please type in your move [Rock, Paper, Scissors]:");
-  let input = readline();
-  return input;
+
+
+function validatePlayer(player){
+  switch(player){
+    case: "One"
+      return true;
+      break;
+    case: "Two"
+      return true;
+      break;
+    default:
+      return false;
+  }
 }
 
-function determinePlayerMoveValue(){
-  console.log("Please type in an integer between 1 and 99 for your move value:");
-  let input = readline();
-  return input;
+function validateSumOfMoveValuesNotGreaterThanNinetyNine(sumOfMoveValues){
+  if(sumOfMoveValues > 99){
+    console.log("Uh-oh, it looks like the sum of move values is over 99");
+    return false;
+  }else{
+    return true;
+  }
+}
+
+function getRoundWinner(roundNumber){
+  let playerOneMoveType;
+  let playerTwoMoveType;
+  let playerOneMoveValue;
+  let playerTwoMoveValue;
+
+    switch (roundNumber) {
+      case 1:
+      initializeVariables(roundNumber, playerOneMoveType, playerTwoMoveType,
+      playerOneMoveValue, playerTwoMoveValue);
+
+        if(validateMoveType(playerOneMoveType) &&
+          validateMoveType(playerTwoMoveType){
+            if(validateMoveValue(playerOneMoveValue) && validateMoveValue(playerTwoMoveType)){
+              determineWinnerByType(playerOneMoveType, playerTwoMoveType);
+              determineWinnerByPoints(playerOneMoveValue, playerTwoMoveValue);
+            }else{
+              console.log("Invalid move value");
+              return null;
+            }
+        }else{
+          console.log("Invalid move type");
+          return null;
+        }
+
+      case 2:
+        initializeVariables(roundNumber, playerOneMoveType, playerTwoMoveType,
+        playerOneMoveValue, playerTwoMoveValue);
+
+          if(validateMoveType(playerOneMoveType) &&
+            validateMoveType(playerTwoMoveType){
+
+              if(validateMoveValue(playerOneMoveValue) && validateMoveValue(playerTwoMoveType)){
+                determineWinnerByType(playerOneMoveType, playerTwoMoveType);
+                determineWinnerByPoints(playerOneMoveValue, playerTwoMoveValue);
+              }else{
+                console.log("Invalid move value");
+                return null;
+              }
+
+          }else{
+            console.log("Invalid move type");
+            return null;
+          }
+
+      case 3:
+        initializeVariables(roundNumber, playerOneMoveType, playerTwoMoveType,
+        playerOneMoveValue, playerTwoMoveValue);
+
+        if(validateMoveType(playerOneMoveType) &&
+            validateMoveType(playerTwoMoveType){
+
+              if(validateMoveValue(playerOneMoveValue) && validateMoveValue(playerTwoMoveType)){
+                determineWinnerByType(playerOneMoveType, playerTwoMoveType);
+                determineWinnerByPoints(playerOneMoveValue, playerTwoMoveValue);
+              }else{
+                console.log("Invalid move value");
+                return null;
+              }
+
+          }else{
+            console.log("Invalid move type");
+            return null;
+          }
+
+          break;
+      default:
+        console.log("Invalid round number");
+
+    }
+
+//   33) should return null if any move types or values are missing
+
+}
+
+function validateMoveValue(moveValue){
+  if(moveValue >= 1 && moveValue <= 97){
+    return true;
+  }else{
+    return false;
+  }
 }
 
 function validateMoveType(moveType){
@@ -73,92 +167,68 @@ function validateMoveType(moveType){
       break;
 }
 
-function validatePlayer(player){
-  switch(player){
-    case: "One"
-      return true;
-      break;
-    case: "Two"
-      return true;
-      break;
-    default:
-      return false;
-  }
-}
+function determineWinnerByType(playerOneMoveType, playerTwoMoveType, roundNumber){
 
-function validateMoveValue(moveValue){
-  if(moveValue >= 1 && moveValue <= 99){
-    return true;
-  }else{
-    return false;
-  }
-}
-
-function validateSumOfMoveValuesNotGreaterThanNinetyNine(sumOfMoveValues){
-  if(sumOfMoveValues > 99){
-    console.log("Uh-oh, it looks like the sum of move values is over 99");
-    return false;
-  }else{
-    return true;
-  }
-}
-
-function getRoundWinner(roundNumber){
-
-    switch (roundNumber) {
-      case 1:
-        return determineRoundOneWinner();
-      case 2:
-        return determineRoundTwoWinner();
-        break;
-      case 3:
-        return determineRoundThreeWinner();
-        break;
-      default:
-        console.log("Hmmmm....we do not know what round it is");
-    }
-
-//  24) should return the correct winner with rock versus scissors
-//   25) should return the correct winner with rock versus paper
-//   26) should return the correct winner with paper versus scissors
-//   27) should return the correct winner with two of the same move type and different values
-//   28) should return the correct winner with two of the same move type and the same value
-//   29) should return the correct winner for round one
-//   30) should return the correct winner for round two
-//   31) should return the correct winner for round three
-//   32) should return null for an invalid round number
-//   33) should return null if any move types or values are missing
-
-}
-
-
-function determineRoundOneWinner(){
-  if (playerOneMoveOneType ==== rock && playerTwoMoveOneType === paper){
-    console.log("Player " + playerTwo.name + " has won round one.")
-    return playerTwo;
-  }
-
-  if (playerOneMoveOneType ==== rock && playerTwoMoveOneType === scissors){
-    console.log("Player " + playerOne.name + " has won round one.")
-    return playerOne;
-  }
-
-  if (playerOneMoveOneType.type ==== playerTwoMoveOneType.type){
-    if(playerOneMoveOneValue > playerTwoMoveOneValue){
-      console.log("Player " + playerOne.name + " has won round one.");
-      return playerOne;
-    }else if(playerOneMoveOneValue < playerTwoMoveOneValue){
-      console.log("Player " + playerTwo.name + "has won round one.");
+    if (playerOneMoveType ==== rock && playerTwoMoveType === paper){
+      console.log("Player " + playerTwo.name + " has won round " + roundNumber);
       return playerTwo;
+    }else if (playerOneMoveType ==== rock && playerTwoMoveType === scissors){
+      console.log("Player " + playerOne.name + " has won round " + roundNumber);
+      return playerOne;
+    }else if(playerOneMoveType === paper && playerTwoMoveType === scissors){
+      console.log("Player " + playerOne.name + " has won round " + roundNumber);
+      return playerTwo;
+    }else if(playerOneMoveType === paper && playerTwoMoveType === rock){
+      console.log("Player " + playerTwo.name + " has won round " + roundNumber);
+      return playerOne;
+    }else if(playerOneMoveType === scissors && playerTwoMoveType === rock){
+      console.log("Player " + playerOne.name + " has won round " + roundNumber);
+      return playerTwo;
+    }else if(playerOneMoveType === scissors && playerTwoMoveType === paper){
+      console.log("Player " + playerTwo.name + " has won round " + roundNumber);
+      return playerOne;
     }
-    else{
-      console.log("Round one has resulted in a tie.");
-      return "tie";
-    }
+}
+
+
+function determineWinnerByPoints(playerOneMoveValue, playerTwoMoveValue, roundNumber){
+
+    if(playerOneMoveValue > playerTwoMoveValue){
+            console.log("Player " + playerOne.name + " has won round " + roundNumber);
+            return playerOne;
+          }else if(playerOneMoveValue < playerTwoMoveValue){
+            console.log("Player " + playerTwo.name + "has won round " + roundNumber);
+            return playerTwo;
+          }else{
+            console.log("Round " + roundNumber +" has resulted in a tie.");
+            return "tie";
+          }
+  }
+
+function initializeVariables(roundNumber, playerOneMoveType, playerTwoMoveType,
+playerOneMoveValue, playerTwoMoveValue){
+  switch (roundNumber) {
+    case 1:
+      playerOneMoveType = playerOneMoveOneType;
+      playerTwoMoveType = playerTwoMoveOneType;
+      playerOneMoveValue = playerOneMoveOneValue;
+      playerTwoMoveValue = playerTwoMoveTwoValue;
+      break;
+    case 2:
+      playerOneMoveType = playerOneMoveTwoType;
+      playerTwoMoveType = playerTwoMoveTwoType;
+      playerOneMoveValue = playerOneMoveTwoValue;
+      playerTwoMoveValue = playerTwoMoveTwoValue;
+      break;
+    case 3:
+      playerOneMoveType = playerOneMoveThreeType;
+      playerTwoMoveType = playerTwoMoveThreeType;
+      playerOneMoveValue = playerOneMoveThreeValue;
+      playerTwoMoveValue = playerTwoMoveThreeValue;
+      break;
   }
 
 }
-
 
 function getGameWinner() {
 //  34) a function called getGameWinner should exist
