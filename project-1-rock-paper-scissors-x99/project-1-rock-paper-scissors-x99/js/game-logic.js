@@ -13,9 +13,11 @@ let playerTwoMoveOneValue;
 let playerTwoMoveTwoValue;
 let playerTwoMoveThreeValue;
 
-var rock = {type:"Rock", winsAgainst:"Scissors", losesTo:"Paper"};
-var paper = {type:"Paper", winsAgainst:"Rock", losesTo:"Scissors"};
-var scissors = {type:"Scissors", winsAgainst:"Paper", losesTo:"Rock"};
+let playerOneMoveType;
+let playerTwoMoveType;
+let playerOneMoveValue;
+let playerTwoMoveValue;
+let roundWinner;
 
 function setPlayerMoves(player, moveOneType,
   moveOneValue, moveTwoType, moveTwoValue,
@@ -26,17 +28,29 @@ function setPlayerMoves(player, moveOneType,
         moveTwoType === undefined ||
         moveThreeType === undefined){
             return null;
-        }else if(moveOneValue === undefined ||
+        }
+
+        if(moveOneValue === undefined ||
         moveTwoValue === undefined ||
       moveThreeValue === undefined){
         return null;
-      }else if(validateMoveType(moveOneType) &&
+      }
+
+      if(validateMoveType(moveOneType) &&
     validateMoveType(moveTwoType) && validateMoveType(moveThreeType)){
       return null;
-    }else if (validateMoveValue(moveOneValue) && validateMoveValue(moveTwoValue)
+    }
+
+    if (validateMoveValue(moveOneValue) && validateMoveValue(moveTwoValue)
     && validateMoveValue(moveThreeValue)){
       return null;
-    }else  if(validatePlayer(player) && player === "Player One")
+    }
+
+    if(validatePlayer(player) === false){
+      return null;
+    }
+
+    if(player === "Player One")
         {
           playerOneMoveOneType = moveOneType;
           playerOneMoveOneValue = moveOneValue;
@@ -44,7 +58,7 @@ function setPlayerMoves(player, moveOneType,
           playerOneMoveTwoValue = moveTwoValue;
           playerOneMoveThreeType = moveThreeType;
           playerOneMoveThreeValue = moveThreeValue;
-        } else if(validatePlayer(player) && player === "Player Two")
+        } else if(player === "Player Two")
         {
 
           playerTwoMoveOneType = moveOneType;
@@ -53,10 +67,8 @@ function setPlayerMoves(player, moveOneType,
           playerTwoMoveTwoValue = moveTwoValue;
           playerTwoMoveThreeType = moveThreeType;
           playerTwoMoveThreeValue = moveThreeValue;
-        }else{
-          return null;
-        }
       }
+    }
 
 
 
@@ -83,23 +95,17 @@ function validateSumOfMoveValuesNotGreaterThanNinetyNine(sumOfMoveValues){
 }
 
 function getRoundWinner(roundNumber){
-  let playerOneMoveType;
-  let playerTwoMoveType;
-  let playerOneMoveValue;
-  let playerTwoMoveValue;
-  let roundWinner;
-
     switch (roundNumber) {
       case 1:
-        initializeVariables(roundNumber, playerOneMoveType, playerTwoMoveType,
-        playerOneMoveValue, playerTwoMoveValue);
+      //  initializeVariables(roundNumber, playerOneMoveType, playerTwoMoveType,
+      //  playerOneMoveValue, playerTwoMoveValue);
 
-        roundWinner =  determineWinnerByType(playerOneMoveType, playerTwoMoveType);
+        roundWinner =  determineWinnerByType(playerOneMoveOneType, playerTwoMoveOneType);
 
         if(roundWinner === "Player One" || roundWinner ===  "Player Two"){
           return roundWinner;
         }else{
-          roundWinner = determineWinnerByPoints(playerOneMoveValue, playerTwoMoveValue, roundNumber);
+          roundWinner = determineWinnerByPoints(playerOneMoveOneValue, playerTwoMoveOneValue, roundNumber);
         }
 
         return roundWinner;
@@ -162,7 +168,7 @@ function validateMoveType(moveType){
 function determineWinnerByType(playerOneMoveType, playerTwoMoveType, roundNumber){
 
     if (playerOneMoveType === "rock" && playerTwoMoveType === "paper"){
-      return "Player One";
+      return "Player Two";
     }else if (playerOneMoveType === "rock" && playerTwoMoveType === "scissors"){
       return "Player One";
     }else if(playerOneMoveType === "paper" && playerTwoMoveType === "scissors"){
